@@ -185,6 +185,34 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 .form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c8882a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
 .form-textarea{resize:vertical;min-height:100px;line-height:1.5}
 .form-hint{font-size:.72rem;color:var(--text-muted);margin-top:.2rem}
+/* Custom date picker — matches form inputs, brand-aligned popover */
+.date-picker{position:relative}
+.date-trigger{width:100%;background:#fff;border:1.5px solid rgba(58,44,30,0.15);border-radius:10px;padding:.8rem 1rem;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--text);cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:border-color .2s,box-shadow .2s;outline:none;line-height:1.4}
+.date-trigger:hover{border-color:rgba(200,136,42,0.4)}
+.date-trigger:focus,.date-trigger.open{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,136,42,0.12)}
+.date-trigger-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.date-trigger-text.placeholder{color:rgba(122,106,88,0.6)}
+.date-trigger svg{flex-shrink:0;color:var(--gold)}
+.date-popover{position:absolute;top:calc(100% + .5rem);left:0;right:0;background:#fff;border:1px solid rgba(58,44,30,0.12);border-radius:14px;padding:1rem;box-shadow:0 12px 32px rgba(58,44,30,0.16),0 2px 6px rgba(58,44,30,0.06);z-index:50;display:none;animation:datePopIn .18s ease-out}
+.date-popover.open{display:block}
+@keyframes datePopIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.date-pop-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem}
+.date-pop-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--brown)}
+.date-nav-btn{background:transparent;border:none;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gold);transition:background .15s,color .15s}
+.date-nav-btn:hover:not(:disabled){background:rgba(200,136,42,0.12)}
+.date-nav-btn:disabled{color:rgba(122,106,88,0.3);cursor:not-allowed}
+.date-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:.35rem}
+.date-weekday{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);text-align:center;padding:.45rem 0}
+.date-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.date-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.88rem;color:var(--text);background:transparent;border:none;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .12s,color .12s;padding:0}
+.date-day:hover:not(:disabled):not(.selected){background:rgba(200,136,42,0.12)}
+.date-day.other-month{color:rgba(122,106,88,0.3)}
+.date-day.today{font-weight:700;box-shadow:inset 0 0 0 1.5px var(--gold)}
+.date-day.selected{background:var(--gold);color:#fff;font-weight:600;box-shadow:none}
+.date-day:disabled{color:rgba(122,106,88,0.28);cursor:not-allowed;text-decoration:line-through;text-decoration-color:rgba(122,106,88,0.35)}
+.date-pop-foot{margin-top:.85rem;padding-top:.75rem;border-top:1px solid rgba(58,44,30,0.08);font-size:.72rem;color:var(--text-muted);text-align:center;line-height:1.5}
+.date-pop-foot strong{color:var(--brown);font-weight:600}
+@media(max-width:480px){.date-popover{padding:.85rem}.date-day{font-size:.82rem}}
 .check-grid{display:flex;flex-direction:column;gap:.6rem;margin-top:.2rem}
 .check-item{display:flex;align-items:center;gap:.7rem;cursor:pointer}
 .check-item input[type=checkbox]{width:18px;height:18px;flex-shrink:0;accent-color:var(--gold);cursor:pointer}
@@ -1047,9 +1075,22 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
         <div class="form-group">
           <label class="form-label">Date *</label>
-          <input class="form-input" type="date" id="resDate"/>
-          <div id="mondayWarn" style="display:none;margin-top:.5rem;background:#fff0ef;border:1px solid #e07060;border-radius:8px;padding:.6rem .9rem;font-size:.78rem;color:#b83a1e;font-weight:600">
-            &#9888; We are closed on Mondays. Please choose another day.
+          <div class="date-picker" id="resDatePicker">
+            <button type="button" class="date-trigger" id="resDateTrigger" aria-haspopup="dialog" aria-expanded="false">
+              <span class="date-trigger-text placeholder" id="resDateText">Select a date</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </button>
+            <div class="date-popover" id="resDatePopover" role="dialog" aria-label="Choose date">
+              <div class="date-pop-head">
+                <button type="button" class="date-nav-btn" id="resDatePrev" aria-label="Previous month"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="date-pop-title" id="resDateTitle">&nbsp;</div>
+                <button type="button" class="date-nav-btn" id="resDateNext" aria-label="Next month"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+              <div class="date-weekdays"><div class="date-weekday">Mon</div><div class="date-weekday">Tue</div><div class="date-weekday">Wed</div><div class="date-weekday">Thu</div><div class="date-weekday">Fri</div><div class="date-weekday">Sat</div><div class="date-weekday">Sun</div></div>
+              <div class="date-grid" id="resDateGrid"></div>
+              <div class="date-pop-foot"><strong>Closed Mondays.</strong> Bookings up to 90 days ahead.</div>
+            </div>
+            <input type="hidden" id="resDate"/>
           </div>
         </div>
         <div class="form-group">
@@ -1180,12 +1221,126 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 document.addEventListener('DOMContentLoaded', function(){
   const dateInput = document.getElementById('resDate');
   if(dateInput){
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-    dateInput.value = today;
     dateInput.addEventListener('change', checkMonday);
   }
+  initDatePicker();
 });
+
+function initDatePicker(){
+  const trigger    = document.getElementById('resDateTrigger');
+  const popover    = document.getElementById('resDatePopover');
+  const titleEl    = document.getElementById('resDateTitle');
+  const gridEl     = document.getElementById('resDateGrid');
+  const prevBtn    = document.getElementById('resDatePrev');
+  const nextBtn    = document.getElementById('resDateNext');
+  const triggerTxt = document.getElementById('resDateText');
+  const hidden     = document.getElementById('resDate');
+  if(!trigger || !popover) return;
+
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const maxDate = new Date(today); maxDate.setDate(maxDate.getDate() + 90);
+  let viewYear  = today.getFullYear();
+  let viewMonth = today.getMonth();
+  let selected  = null;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function iso(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function fmt(d){ return d.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
+  function sameDay(a,b){ return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate(); }
+
+  function render(){
+    titleEl.textContent = months[viewMonth]+' '+viewYear;
+    const first = new Date(viewYear, viewMonth, 1);
+    const startOffset = (first.getDay()+6)%7; // Monday-first
+    const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+    const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
+    let html = '';
+    for(let i=startOffset-1;i>=0;i--){
+      html += '<button type="button" class="date-day other-month" disabled>'+(prevMonthDays-i)+'</button>';
+    }
+    for(let d=1;d<=daysInMonth;d++){
+      const date = new Date(viewYear, viewMonth, d);
+      const isPast    = date < today;
+      const isFuture  = date > maxDate;
+      const isMonday  = date.getDay() === 1;
+      const isToday   = sameDay(date, today);
+      const isSel     = selected && sameDay(date, selected);
+      const disabled  = isPast || isFuture || isMonday;
+      const cls = ['date-day'];
+      if(isToday) cls.push('today');
+      if(isSel)   cls.push('selected');
+      const title = isMonday ? 'Closed Mondays' : (isPast ? 'Past date' : (isFuture ? 'Beyond 90-day window' : ''));
+      html += '<button type="button" class="'+cls.join(' ')+'" data-date="'+iso(date)+'"'+
+              (disabled?' disabled':'')+(title?' title="'+title+'"':'')+'>'+d+'</button>';
+    }
+    const totalCells = startOffset + daysInMonth;
+    const trailing   = (7 - (totalCells % 7)) % 7;
+    for(let i=1;i<=trailing;i++){
+      html += '<button type="button" class="date-day other-month" disabled>'+i+'</button>';
+    }
+    gridEl.innerHTML = html;
+    prevBtn.disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
+    const nextFirst = new Date(viewYear, viewMonth+1, 1);
+    nextBtn.disabled = nextFirst > maxDate;
+  }
+
+  function open(){
+    if(selected){ viewYear = selected.getFullYear(); viewMonth = selected.getMonth(); }
+    render();
+    popover.classList.add('open');
+    trigger.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+  }
+  function close(){
+    popover.classList.remove('open');
+    trigger.classList.remove('open');
+    trigger.setAttribute('aria-expanded','false');
+  }
+
+  trigger.addEventListener('click', function(e){
+    e.stopPropagation();
+    popover.classList.contains('open') ? close() : open();
+  });
+  prevBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(viewMonth === 0){ viewMonth = 11; viewYear--; } else viewMonth--;
+    render();
+  });
+  nextBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(viewMonth === 11){ viewMonth = 0; viewYear++; } else viewMonth++;
+    render();
+  });
+  gridEl.addEventListener('click', function(e){
+    const btn = e.target.closest('.date-day');
+    if(!btn || btn.disabled) return;
+    const dStr = btn.getAttribute('data-date');
+    if(!dStr) return;
+    selected = new Date(dStr+'T00:00:00');
+    triggerTxt.textContent = fmt(selected);
+    triggerTxt.classList.remove('placeholder');
+    hidden.value = dStr;
+    hidden.dispatchEvent(new Event('change',{bubbles:true}));
+    close();
+  });
+  document.addEventListener('click', function(e){
+    if(!popover.classList.contains('open')) return;
+    if(popover.contains(e.target) || trigger.contains(e.target)) return;
+    close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && popover.classList.contains('open')){ close(); trigger.focus(); }
+  });
+
+  // Pre-select today unless it's a Monday — keeps original UX of "today is ready"
+  if(today.getDay() !== 1){
+    selected = new Date(today);
+    triggerTxt.textContent = fmt(selected);
+    triggerTxt.classList.remove('placeholder');
+    hidden.value = iso(today);
+  }
+}
 
 function checkMonday(){
   const dateInput = document.getElementById('resDate');

@@ -1208,16 +1208,6 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
       <p>Thank you! We&#39;ll call or email you shortly to confirm your reservation at Ajanta.</p>
       <p style="font-size:.8rem;color:var(--gold);font-weight:600" id="resSummary"></p>
 
-      <div id="setupReminder" style="display:none;background:#fff8e6;border:1px solid #e0a84a;border-radius:10px;padding:1rem 1.2rem;font-size:.8rem;color:#5a3a10;line-height:1.7;text-align:left;max-width:320px">
-        <strong>&#9881;&#65039; Developer note:</strong> This form will send real emails once you replace <code>YOUR_FORM_ID</code> in the code with your actual Formspree ID.<br><br>
-        <strong>Steps:</strong><br>
-        1. Go to <strong>formspree.io</strong> &rarr; Sign up free<br>
-        2. Create a new form &rarr; enter the restaurant&#39;s email<br>
-        3. Copy the Form ID (e.g. <code>xpwzgkrn</code>)<br>
-        4. In the HTML find <code>YOUR_FORM_ID</code> and replace it<br>
-        5. Upload the updated file &mdash; emails will now work live &#10003;
-      </div>
-
       <button class="btn-primary" onclick="showHome()">Back to Home</button>
     </div>
 
@@ -1387,7 +1377,8 @@ async function submitReservation(){
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+  // Formspree endpoint — receives reservations and forwards to the owner inbox.
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqbkljl';
 
   const payload = {
     _subject:        'New Reservation — ' + firstName + ' ' + lastName + ' — ' + dateStr + ' at ' + time,
@@ -1415,31 +1406,15 @@ async function submitReservation(){
       document.getElementById('resSuccess').classList.add('show');
       window.scrollTo({top:0, behavior:'smooth'});
     } else {
-      if(FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')){
-        showSetupReminder(firstName, lastName, dateStr, time, guests);
-      } else {
-        btn.disabled = false;
-        btn.textContent = 'Confirm Reservation';
-        alert('Something went wrong sending your booking. Please call us on (03) 5996 7455.');
-      }
-    }
-  } catch(err){
-    if(FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')){
-      showSetupReminder(firstName, lastName, dateStr, time, guests);
-    } else {
       btn.disabled = false;
       btn.textContent = 'Confirm Reservation';
-      alert('Connection error. Please call us on (03) 5996 7455 to make your booking.');
+      alert('Something went wrong sending your booking. Please call us on (03) 5996 7455.');
     }
+  } catch(err){
+    btn.disabled = false;
+    btn.textContent = 'Confirm Reservation';
+    alert('Connection error. Please call us on (03) 5996 7455 to make your booking.');
   }
-}
-
-function showSetupReminder(firstName, lastName, dateStr, time, guests){
-  document.getElementById('resSummary').textContent = firstName + ' ' + lastName + ' · ' + guests + ' · ' + dateStr + ' at ' + time;
-  document.getElementById('resSuccess').classList.add('show');
-  document.getElementById('resFormWrap').style.display = 'none';
-  document.getElementById('setupReminder').style.display = 'block';
-  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function toggleMenu(){

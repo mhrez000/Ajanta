@@ -1377,16 +1377,11 @@ async function submitReservation(){
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
-  // FormSubmit.co — sends reservation details by email. After the first
-  // submission, click the activation link in the email to confirm ownership.
-  // For privacy you can later replace the email below with the obfuscated
-  // hash that FormSubmit emails you (e.g. https://formsubmit.co/ajax/abc123).
-  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/mohammadrezaie565@gmail.com';
+  // Formspree endpoint — receives reservations and forwards to the owner inbox.
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqbkljl';
 
   const payload = {
     _subject:        'New Reservation — ' + firstName + ' ' + lastName + ' — ' + dateStr + ' at ' + time,
-    _template:       'table',
-    _captcha:        'false',
     Name:            firstName + ' ' + lastName,
     Phone:           phone,
     Email:           email || 'Not provided',
@@ -1400,13 +1395,12 @@ async function submitReservation(){
   };
 
   try {
-    const res = await fetch(FORM_ENDPOINT, {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload),
     });
-    const data = await res.json().catch(() => ({}));
-    if(res.ok && (data.success === 'true' || data.success === true)){
+    if(res.ok){
       document.getElementById('resSummary').textContent = firstName + ' ' + lastName + ' · ' + guests + ' · ' + dateStr + ' at ' + time;
       document.getElementById('resFormWrap').style.display = 'none';
       document.getElementById('resSuccess').classList.add('show');

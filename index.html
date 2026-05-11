@@ -93,18 +93,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--brown);disp
 .save-badge{color:#b83a1e;font-size:.75rem;font-weight:600;margin-top:.3rem;display:inline-block}
 
 /* ABOUT */
-.about-section{padding:3.5rem 1.4rem;position:relative;overflow:hidden;color:#fff}
-.about-bg{position:absolute;inset:0;z-index:0}
-.about-bg img{width:100%;height:100%;object-fit:cover}
-.about-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,12,4,0.76) 0%,rgba(20,12,4,0.85) 100%)}
+.about-section{padding:3.5rem 1.4rem;position:relative;overflow:hidden;color:#fff;background:var(--brown)}
+.about-bg{position:absolute;inset:0;z-index:0;opacity:.18}
+.about-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.55)}
+.about-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,44,30,.78) 0%,rgba(42,31,20,.92) 100%)}
 .about-section>*:not(.about-bg){position:relative;z-index:1}
-.about-tag{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.6rem}
-.about-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:1.4rem}
-.about-body{font-size:.9rem;color:rgba(255,255,255,0.82);line-height:1.75;margin-bottom:1rem}
-.about-quote{border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:1.3rem;margin-top:1.8rem}
-.quote-icon{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold);line-height:.8;margin-bottom:.5rem}
-.quote-text{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.6}
-.quote-attr{font-size:.78rem;color:rgba(255,255,255,0.5);margin-top:.6rem}
+.about-tag{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:.6rem}
+.about-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:1.4rem;color:#fff}
+.about-body{font-size:.9rem;color:rgba(255,247,235,0.92);line-height:1.75;margin-bottom:1rem}
+.about-quote{border:1px solid rgba(200,136,42,0.35);background:rgba(0,0,0,0.22);border-radius:12px;padding:1.3rem;margin-top:1.8rem;backdrop-filter:blur(2px)}
+.quote-icon{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold-light);line-height:.8;margin-bottom:.5rem}
+.quote-text{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:rgba(255,247,235,0.95);line-height:1.6}
+.quote-attr{font-size:.78rem;color:rgba(224,168,74,0.85);margin-top:.6rem;letter-spacing:.05em}
 
 /* CONTACT */
 .contact-section{padding:3.5rem 1.4rem 4rem;background:var(--cream)}

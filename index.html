@@ -165,6 +165,18 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 .bar-subhead{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--gold);margin-top:1.2rem;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.1em}
 .info-box{background:rgba(200,136,42,0.08);border:1px solid rgba(200,136,42,0.2);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--text-muted);line-height:1.6}
 .info-box strong{color:var(--gold)}
+
+.order-cta{background:var(--brown);border-radius:14px;padding:1.5rem;margin-bottom:1.8rem;color:#fff;box-shadow:0 4px 14px rgba(58,44,30,0.18)}
+.order-cta-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.order-cta-icon{flex-shrink:0;width:54px;height:54px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.order-cta-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.order-cta-tag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:.25rem}
+.order-cta-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:#fff;line-height:1.25}
+.order-cta-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.order-cta-btn{flex:1;min-width:140px;display:flex;align-items:center;justify-content:center;gap:.55rem;background:#fff;color:var(--text);text-decoration:none;padding:.85rem 1rem;border-radius:10px;font-weight:600;font-size:.95rem;transition:transform .12s,background .18s}
+.order-cta-btn:hover{background:#fffaf0;transform:translateY(-1px)}
+.order-cta-btn svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+@media(max-width:420px){.order-cta{padding:1.25rem}.order-cta-title{font-size:1.05rem}.order-cta-actions{flex-direction:column}.order-cta-btn{min-width:0;width:100%}}
 .note-italic{font-size:.78rem;color:var(--text-muted);font-style:italic;margin-bottom:.8rem}
 
 /* RESERVATION PAGE */
@@ -635,7 +647,27 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <p class="menu-page-sub">Home delivery available · Min order $35 · Delivery fee $5 (under 4km)</p>
   </div>
   <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
-  <div class="info-box">To place a takeaway order call <strong>(03) 5996 7455</strong> or <strong>0424 874 238</strong> for quick pick-up / delivery.</div>
+  <div class="order-cta">
+    <div class="order-cta-head">
+      <div class="order-cta-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+      </div>
+      <div>
+        <p class="order-cta-tag">Order Direct</p>
+        <h3 class="order-cta-title">Call to place a takeaway order</h3>
+      </div>
+    </div>
+    <div class="order-cta-actions">
+      <a class="order-cta-btn" href="tel:+61359967455">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (03) 5996 7455
+      </a>
+      <a class="order-cta-btn" href="tel:+61424874238">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        0424 874 238
+      </a>
+    </div>
+  </div>
 
   <div class="menu-category">
     <h3 class="category-title">Entrée — Vegetarian</h3>

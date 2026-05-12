@@ -176,6 +176,9 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 .order-cta-btn{flex:1;min-width:140px;display:flex;align-items:center;justify-content:center;gap:.55rem;background:#fff;color:var(--text);text-decoration:none;padding:.85rem 1rem;border-radius:10px;font-weight:600;font-size:.95rem;transition:transform .12s,background .18s}
 .order-cta-btn:hover{background:#fffaf0;transform:translateY(-1px)}
 .order-cta-btn svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.order-cta-btn--primary{background:var(--gold);color:#fff}
+.order-cta-btn--primary:hover{background:var(--gold-light)}
+.order-cta-btn--primary svg{stroke:#fff}
 @media(max-width:420px){.order-cta{padding:1.25rem}.order-cta-title{font-size:1.05rem}.order-cta-actions{flex-direction:column}.order-cta-btn{min-width:0;width:100%}}
 .note-italic{font-size:.78rem;color:var(--text-muted);font-style:italic;margin-bottom:.8rem}
 
@@ -451,6 +454,27 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <p class="menu-page-sub">All main courses cooked to your taste &mdash; mild, medium or hot</p>
   </div>
   <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+  <div class="order-cta">
+    <div class="order-cta-head">
+      <div class="order-cta-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div>
+        <p class="order-cta-tag">Reserve Your Table</p>
+        <h3 class="order-cta-title">Book your table at Ajanta</h3>
+      </div>
+    </div>
+    <div class="order-cta-actions">
+      <a class="order-cta-btn order-cta-btn--primary" href="#" onclick="showMenu('reservation');return false;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Make a Reservation
+      </a>
+      <a class="order-cta-btn" href="tel:+61359967455">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (03) 5996 7455
+      </a>
+    </div>
+  </div>
 
   <div class="menu-category">
     <h3 class="category-title">Entrée — Vegetarian</h3>

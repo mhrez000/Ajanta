@@ -238,6 +238,10 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 .res-success .btn-primary{margin-top:.5rem}
 .res-policy{margin-top:1.5rem;background:rgba(200,136,42,0.07);border:1px solid rgba(200,136,42,0.2);border-radius:10px;padding:1rem 1.2rem;font-size:.78rem;color:var(--text-muted);line-height:1.6}
 .res-policy strong{color:var(--brown);font-weight:600}
+
+.blink-1{-webkit-animation:blink-1 0.6s both;animation:blink-1 0.6s both}
+@-webkit-keyframes blink-1{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
+@keyframes blink-1{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
 </style>
 </head>
 <body>
@@ -289,7 +293,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <p class="hero-desc">Experience the rich flavours and warm hospitality of traditional Indian cuisine, crafted by one of Melbourne&#39;s finest chefs &mdash; dine in, take away, or have it delivered to your door.</p>
     <div class="hero-btns">
       <a href="#specials" class="btn-primary">View Our Specials</a>
-      <a href="#" onclick="showMenu('reservation')" class="btn-outline">Make a Reservation</a>
+      <a href="#" onclick="showMenu('reservation')" class="btn-outline blink-1">Make a Reservation</a>
     </div>
     <div class="hero-stats">
       <div><div class="stat-value">29+</div><div class="stat-label">Years of Service</div></div>

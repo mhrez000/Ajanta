@@ -22,12 +22,24 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);font-size:15px;overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--brown);display:flex;align-items:center;justify-content:space-between;padding:0 1.4rem;height:72px}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--brown);display:flex;align-items:center;justify-content:space-between;padding:0 1.4rem;height:84px}
 .nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.nav-logo-img{height:54px;width:auto}
+.nav-logo-img{height:64px;width:auto}
 .nav-brand-text{display:flex;flex-direction:column;gap:1px}
 .nav-brand-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#fff;line-height:1}
 .nav-brand-sub{font-size:0.55rem;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;font-weight:500}
+.nav-links{display:none;align-items:center;gap:.15rem}
+.nav-link{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:500;color:rgba(255,255,255,0.85);text-decoration:none;padding:.55rem 1rem;border-radius:6px;transition:color .15s,background .15s;cursor:pointer;background:none;border:none}
+.nav-link:hover{color:var(--gold);background:rgba(255,255,255,0.05)}
+.nav-dropdown{position:relative}
+.nav-dropdown-trigger{display:inline-flex;align-items:center;gap:.35rem}
+.nav-dropdown-trigger::after{content:'\25BE';font-size:.75rem;color:var(--gold);margin-left:.05rem;transition:transform .2s}
+.nav-dropdown:hover .nav-dropdown-trigger::after,.nav-dropdown:focus-within .nav-dropdown-trigger::after{transform:rotate(180deg)}
+.nav-dropdown-menu{position:absolute;top:calc(100% + .35rem);right:0;min-width:210px;background:var(--brown);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:.4rem;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .15s,visibility .15s,transform .15s;box-shadow:0 14px 28px rgba(0,0,0,0.35)}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown-menu a{display:block;padding:.55rem .8rem;color:rgba(255,255,255,0.85);text-decoration:none;font-family:'Inter',sans-serif;font-size:.92rem;border-radius:6px;transition:background .15s,color .15s}
+.nav-dropdown-menu a:hover{background:rgba(200,136,42,0.18);color:var(--gold)}
+@media(min-width:780px){nav{height:96px;padding:0 2rem}.nav-logo-img{height:74px}.nav-links{display:flex}.hamburger{display:none}}
 .hamburger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -35,7 +47,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--brown);disp
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* MOBILE MENU */
-.mob-menu{position:fixed;inset:0;z-index:199;background:var(--brown);display:flex;flex-direction:column;padding:90px 2rem 2rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto}
+.mob-menu{position:fixed;inset:0;z-index:199;background:var(--brown);display:flex;flex-direction:column;padding:100px 2rem 2rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto}
 .mob-menu.open{transform:translateX(0)}
 .mob-nav-link{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:400;color:#fff;text-decoration:none;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.08);display:block}
 .mob-nav-link:hover{color:var(--gold)}
@@ -52,7 +64,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--brown);disp
 .mob-menu-tagline{color:rgba(255,255,255,0.4);font-size:.85rem;margin-top:1.2rem}
 
 /* HERO */
-.hero{margin-top:72px;min-height:calc(100vh - 72px);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem 1.4rem 2rem;overflow:hidden}
+.hero{margin-top:84px;min-height:calc(100vh - 84px);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem 1.4rem 2rem;overflow:hidden}
+@media(min-width:780px){.hero{margin-top:96px;min-height:calc(100vh - 96px)}}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(25,15,5,0.35) 0%,rgba(25,15,5,0.72) 100%);z-index:1}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero>*:not(.hero-bg):not(.hero-img){position:relative;z-index:2}
@@ -283,6 +296,22 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
   <a class="nav-brand" href="#" onclick="showHome()">
     <img class="nav-logo-img" src="img/logo.png" alt="Ajanta Indian Restaurant" width="437" height="240" decoding="async"/>
   </a>
+  <div class="nav-links" aria-label="Primary navigation">
+    <a class="nav-link" href="#" onclick="showHome();return false;">Home</a>
+    <a class="nav-link" href="#" onclick="showMenu('reservation');return false;">Reservation</a>
+    <a class="nav-link" href="#specials" onclick="showHome()">Specials</a>
+    <a class="nav-link" href="#contact" onclick="showHome()">Contact</a>
+    <div class="nav-dropdown">
+      <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true">Our Menu</button>
+      <div class="nav-dropdown-menu" role="menu">
+        <a href="#" role="menuitem" onclick="showMenu('dining');return false;">Dining Menu</a>
+        <a href="#" role="menuitem" onclick="showMenu('takeaway');return false;">Takeaway Menu</a>
+        <a href="#" role="menuitem" onclick="showMenu('beverage');return false;">Beverage Menu</a>
+        <a href="#" role="menuitem" onclick="showMenu('setmenu');return false;">Set Menus</a>
+        <a href="#" role="menuitem" onclick="showMenu('special');return false;">Special Offers</a>
+      </div>
+    </div>
+  </div>
   <button class="hamburger" id="burger" aria-label="Menu" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>

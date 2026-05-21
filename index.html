@@ -1189,6 +1189,8 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     </div>
 
     <div id="resFormWrap">
+      <!-- Honeypot: bots auto-fill this; humans never see it. Formspree drops any submission where _gotcha is filled. -->
+      <input type="text" name="_gotcha" id="resGotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"/>
       <h2 class="res-form-title">Your Details</h2>
 
       <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
@@ -1510,6 +1512,11 @@ async function submitReservation(){
 
   const dateStr = d.toLocaleDateString('en-AU', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 
+  // Honeypot: if a bot filled the hidden field, drop the submission client-side
+  // (Formspree also drops it server-side via the _gotcha field name).
+  const gotcha = document.getElementById('resGotcha').value;
+  if(gotcha){ return; }
+
   const btn = document.getElementById('resSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Sending…';
@@ -1518,7 +1525,8 @@ async function submitReservation(){
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqbkljl';
 
   const payload = {
-    _subject:        'New Reservation — ' + firstName + ' ' + lastName + ' — ' + dateStr + ' at ' + time,
+    _subject:        'Ajanta Reservation: ' + dateStr + ' at ' + time + ' — ' + firstName + ' ' + lastName + ' (party of ' + guests + ')',
+    _gotcha:         gotcha,
     Name:            firstName + ' ' + lastName,
     Phone:           phone,
     Email:           email || 'Not provided',
@@ -1530,6 +1538,10 @@ async function submitReservation(){
     'Dietary Requirements': dietary,
     'Additional Notes': notes || 'None',
   };
+  // Only set _replyto when the customer actually gave us an email, so the
+  // owner can hit Reply and write to them directly. This also helps spam
+  // filters score the email as a real conversation, not a no-reply blast.
+  if(email){ payload._replyto = email; }
 
   try {
     const res = await fetch(FORMSPREE_ENDPOINT, {

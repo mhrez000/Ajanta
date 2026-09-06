@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mhrez000.github.io/Ajanta/sitemap.xml

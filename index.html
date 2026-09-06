@@ -198,6 +198,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 .menu-page-sub{font-size:.85rem;color:rgba(255,255,255,0.65);margin-top:.4rem;line-height:1.5}
 .back-btn{display:inline-flex;align-items:center;gap:.5rem;background:none;border:1px solid rgba(200,136,42,0.4);color:var(--gold);border-radius:8px;padding:.55rem 1rem;font-size:.82rem;font-weight:600;cursor:pointer;margin-bottom:1.5rem;font-family:'Inter',sans-serif}
 .back-btn:hover{background:rgba(200,136,42,0.08)}
+a.back-btn{text-decoration:none}
 .menu-category{margin-bottom:2.5rem}
 .category-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--brown);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1.5px solid var(--gold);letter-spacing:.02em}
 .category-sub{font-size:.78rem;color:var(--text-muted);font-style:italic;margin-bottom:1rem;margin-top:-.5rem}
@@ -363,22 +364,22 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 
 <!-- NAV -->
 <nav>
-  <a class="nav-brand" href="#" onclick="showHome()">
+  <a class="nav-brand" href="#home">
     <img class="nav-logo-img" src="img/logo.png" alt="Ajanta Indian Restaurant" width="437" height="240" decoding="async"/>
   </a>
   <div class="nav-links" role="navigation" aria-label="Primary navigation">
-    <a class="nav-link" href="#" onclick="showHome();return false;">Home</a>
-    <a class="nav-link" href="#" onclick="showMenu('reservation');return false;">Reservation</a>
-    <a class="nav-link" href="#specials" onclick="showHome()">Specials</a>
-    <a class="nav-link" href="#contact" onclick="showHome()">Contact</a>
+    <a class="nav-link" href="#home">Home</a>
+    <a class="nav-link" href="#reserve">Reservation</a>
+    <a class="nav-link" href="#specials">Specials</a>
+    <a class="nav-link" href="#contact">Contact</a>
     <div class="nav-dropdown">
       <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true">Our Menu</button>
       <div class="nav-dropdown-menu" role="menu">
-        <a href="#" role="menuitem" onclick="showMenu('dining');return false;">Dining Menu</a>
-        <a href="#" role="menuitem" onclick="showMenu('takeaway');return false;">Takeaway Menu</a>
-        <a href="#" role="menuitem" onclick="showMenu('beverage');return false;">Beverage Menu</a>
-        <a href="#" role="menuitem" onclick="showMenu('setmenu');return false;">Set Menus</a>
-        <a href="#" role="menuitem" onclick="showMenu('special');return false;">Special Offers</a>
+        <a href="#menu/dining" role="menuitem">Dining Menu</a>
+        <a href="#menu/takeaway" role="menuitem">Takeaway Menu</a>
+        <a href="#menu/beverage" role="menuitem">Beverage Menu</a>
+        <a href="#menu/setmenu" role="menuitem">Set Menus</a>
+        <a href="#menu/special" role="menuitem">Special Offers</a>
       </div>
     </div>
   </div>
@@ -389,20 +390,20 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu" role="navigation" aria-label="Mobile navigation">
-  <a class="mob-nav-link" href="#" onclick="showHome();toggleMenu()">Home</a>
-  <a class="mob-nav-link" href="#" onclick="showMenu('reservation');toggleMenu()">Reservation</a>
-  <a class="mob-nav-link" href="#specials" onclick="showHome();toggleMenu()">Specials</a>
-  <a class="mob-nav-link" href="#contact" onclick="showHome();toggleMenu()">Contact</a>
+  <a class="mob-nav-link" href="#home" onclick="closeMenu()">Home</a>
+  <a class="mob-nav-link" href="#reserve" onclick="closeMenu()">Reservation</a>
+  <a class="mob-nav-link" href="#specials" onclick="closeMenu()">Specials</a>
+  <a class="mob-nav-link" href="#contact" onclick="closeMenu()">Contact</a>
   <div class="mob-dropdown-toggle" onclick="toggleDropdown()">
     <span>Our Menu</span>
     <span class="mob-dropdown-arrow" id="dropArrow">&#9660;</span>
   </div>
   <div class="mob-dropdown-items" id="dropItems">
-    <a href="#" onclick="showMenu('dining');toggleMenu()">Dining Menu</a>
-    <a href="#" onclick="showMenu('takeaway');toggleMenu()">Takeaway Menu</a>
-    <a href="#" onclick="showMenu('beverage');toggleMenu()">Beverage Menu</a>
-    <a href="#" onclick="showMenu('setmenu');toggleMenu()">Set Menus</a>
-    <a href="#" onclick="showMenu('special');toggleMenu()">Special Offers</a>
+    <a href="#menu/dining" onclick="closeMenu()">Dining Menu</a>
+    <a href="#menu/takeaway" onclick="closeMenu()">Takeaway Menu</a>
+    <a href="#menu/beverage" onclick="closeMenu()">Beverage Menu</a>
+    <a href="#menu/setmenu" onclick="closeMenu()">Set Menus</a>
+    <a href="#menu/special" onclick="closeMenu()">Special Offers</a>
   </div>
   <a href="tel:0359967455" class="mob-menu-phone">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
@@ -424,10 +425,10 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <p class="hero-desc">Experience the rich flavours and warm hospitality of traditional Indian cuisine, crafted by one of Melbourne&#39;s finest chefs &mdash; dine in, take away, or have it delivered to your door.</p>
     <div class="hero-btns">
       <a href="#specials" class="btn-primary">View Our Specials</a>
-      <a href="#" onclick="showMenu('reservation')" class="btn-outline blink-1">Make a Reservation</a>
+      <a href="#reserve" class="btn-outline blink-1">Make a Reservation</a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-value">29+</div><div class="stat-label">Years of Service</div></div>
+      <div><div class="stat-value" id="yearsStat">31+</div><div class="stat-label">Years of Service</div></div>
       <div><div class="stat-value">BYO</div><div class="stat-label">Wine Welcome</div></div>
       <div><div class="stat-value">5&#9733;</div><div class="stat-label">Customer Rated</div></div>
     </div>
@@ -584,7 +585,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
       </a>
     </div>
-    <p class="footer-copy" style="margin-top:1rem;font-size:.7rem">&copy; 2026 Ajanta Indian Restaurant. All rights reserved.</p>
+    <p class="footer-copy" style="margin-top:1rem;font-size:.7rem">&copy; <span id="copyYear">2026</span> Ajanta Indian Restaurant. All rights reserved.</p>
     <p class="footer-credit">Website designed &amp; built by
       <a href="https://sageandsummit.com.au/" target="_blank" rel="noopener" title="Sage &amp; Summit — web design &amp; development">
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#445c3f"/><path d="M16 6 6 26h20L16 6Z" fill="#eceee3"/><path d="M16 14 10.5 26h11L16 14Z" fill="#aab992"/></svg>
@@ -602,7 +603,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <h1 class="menu-page-title">Dining Menu</h1>
     <p class="menu-page-sub">All main courses cooked to your taste &mdash; mild, medium or hot</p>
   </div>
-  <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
   <div class="order-cta">
     <div class="order-cta-head">
       <div class="order-cta-icon">
@@ -614,7 +615,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
       </div>
     </div>
     <div class="order-cta-actions">
-      <a class="order-cta-btn order-cta-btn--primary" href="#" onclick="showMenu('reservation');return false;">
+      <a class="order-cta-btn order-cta-btn--primary" href="#reserve">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Make a Reservation
       </a>
@@ -809,7 +810,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <div class="menu-item"><div class="item-left"><div class="item-name">126. Gajar Halwa</div><div class="item-desc">A warm, comforting Indian carrot pudding slow-cooked with milk and nuts.</div></div><div class="item-price">$8.00</div></div>
   </div>
 
-  <button class="back-btn" onclick="showHome();window.scrollTo(0,0)">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 </div>
 
 <!-- ══ TAKEAWAY MENU PAGE ══ -->
@@ -819,7 +820,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <h1 class="menu-page-title">Takeaway Menu</h1>
     <p class="menu-page-sub">Home delivery available · Min order $35 · Delivery fee $5 (under 4km)</p>
   </div>
-  <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
   <div class="order-cta">
     <div class="order-cta-head">
       <div class="order-cta-icon">
@@ -1015,7 +1016,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <div class="menu-item"><div class="item-left"><div class="item-name">120. Soft Drink Bottles (1.25L, 1.1L)</div></div><div class="item-price">$7.00</div></div>
   </div>
 
-  <button class="back-btn" onclick="showHome();window.scrollTo(0,0)">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 </div>
 
 <!-- ══ BEVERAGE MENU PAGE ══ -->
@@ -1025,7 +1026,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <h1 class="menu-page-title">Beverage Menu</h1>
     <p class="menu-page-sub">A curated selection of premium beverages — from refreshing soft drinks to fine wines, spirits, and traditional Indian favourites</p>
   </div>
-  <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 
   <div class="menu-category">
     <h3 class="category-title">Beers</h3>
@@ -1124,7 +1125,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <strong>Please drink responsibly</strong>
   </div>
 
-  <button class="back-btn" onclick="showHome();window.scrollTo(0,0)">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 </div>
 
 
@@ -1135,7 +1136,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <h1 class="menu-page-title">Set Menus</h1>
     <p class="menu-page-sub">Curated multi-course feasts — minimum 2 persons</p>
   </div>
-  <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 
   <div class="set-menu-card">
     <div class="set-menu-header"><span class="set-menu-name">Set Menu 1</span><span class="set-menu-price">$40 / person</span></div>
@@ -1166,7 +1167,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     Please let us know if you have any special dietary considerations or allergies, or wish to modify any curry to suit your taste. Sorry, we do not pack left-over food for health and safety purposes.
   </div>
 
-  <button class="back-btn" onclick="showHome();window.scrollTo(0,0)">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 </div>
 
 
@@ -1177,7 +1178,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     <h1 class="menu-page-title">Special Offers</h1>
     <p class="menu-page-sub">Family packs, lunch specials and value combos</p>
   </div>
-  <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 
   <div class="menu-category">
     <h3 class="category-title">Family Packs</h3>
@@ -1224,7 +1225,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
     All prices include GST. To order call <strong>(03) 5996 7455</strong> or <strong>0424 874 238</strong>.
   </div>
 
-  <button class="back-btn" onclick="showHome();window.scrollTo(0,0)">&#8592; Back to Home</button>
+  <a class="back-btn" href="#home">&#8592; Back to Home</a>
 </div>
 
 <!-- ══ RESERVATION PAGE ══ -->
@@ -1237,7 +1238,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
   </div>
 
   <div class="res-body">
-    <button class="back-btn" onclick="showHome()">&#8592; Back to Home</button>
+    <a class="back-btn" href="#home">&#8592; Back to Home</a>
 
     <div class="res-info-row">
       <div class="res-info-card">
@@ -1420,7 +1421,7 @@ footer{background:var(--brown);color:rgba(255,255,255,0.5);padding:2rem 1.4rem;t
       <p>Thank you! We&#39;ll call or email you shortly to confirm your reservation at Ajanta.</p>
       <p style="font-size:.8rem;color:var(--gold);font-weight:600" id="resSummary"></p>
 
-      <button class="btn-primary" onclick="showHome()">Back to Home</button>
+      <a class="btn-primary" href="#home">Back to Home</a>
     </div>
 
   </div>
@@ -1653,17 +1654,71 @@ function toggleDropdown(){
   document.getElementById('dropItems').classList.toggle('open');
   document.getElementById('dropArrow').classList.toggle('open');
 }
+function closeMenu(){
+  const menu=document.getElementById('mobMenu');
+  if(menu.classList.contains('open')) toggleMenu();
+}
+
+/* ── Hash router ──────────────────────────────────────────────
+   Every menu and the reservation page has its own URL so it can be
+   linked, shared and reached with the browser back button:
+     #menu/dining  #menu/takeaway  #menu/beverage  #menu/setmenu  #menu/special
+     #reserve      #home / #specials / #about / #contact (home sections)
+   Note: search engines ignore the fragment, so these still index as
+   one page. Separate HTML pages are the next step if menus need to rank. */
+const ROUTES = {
+  'menu/dining':   { page:'dining',      title:'Dining Menu' },
+  'menu/takeaway': { page:'takeaway',    title:'Takeaway Menu' },
+  'menu/beverage': { page:'beverage',    title:'Beverage Menu' },
+  'menu/setmenu':  { page:'setmenu',     title:'Set Menus' },
+  'menu/special':  { page:'special',     title:'Special Offers' },
+  'reserve':       { page:'reservation', title:'Make a Reservation' }
+};
+const SITE_TITLE = document.title;
+let currentPage = null;
+
+function route(){
+  const hash = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+  const r = ROUTES[hash];
+  const main = document.getElementById('mainContent');
+  if(r){
+    main.style.display = 'none';
+    document.querySelectorAll('.menu-page').forEach(p=>p.classList.toggle('active', p.id === 'page-'+r.page));
+    document.title = r.title + ' | Ajanta Indian Restaurant';
+    if(currentPage !== r.page) window.scrollTo({top:0, behavior:'instant'});
+    currentPage = r.page;
+    return;
+  }
+  const wasOnPage = currentPage !== null;
+  main.style.display = 'block';
+  document.querySelectorAll('.menu-page').forEach(p=>p.classList.remove('active'));
+  document.title = SITE_TITLE;
+  currentPage = null;
+  const target = hash && hash !== 'home' ? document.getElementById(hash) : null;
+  if(target){
+    // The section was hidden when the browser tried its native fragment
+    // scroll, so do it now that the home view is visible again.
+    target.scrollIntoView({behavior: wasOnPage ? 'instant' : 'smooth', block:'start'});
+  } else if(wasOnPage || hash === 'home'){
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('DOMContentLoaded', function(){
+  route();
+  const years = new Date().getFullYear() - 1995;
+  const ys = document.getElementById('yearsStat');
+  if(ys && years > 0) ys.textContent = years + '+';
+  const cy = document.getElementById('copyYear');
+  if(cy) cy.textContent = String(new Date().getFullYear());
+});
+
+// Kept for any external callers; navigation now goes through the hash.
 function showMenu(id){
-  document.getElementById('mainContent').style.display='none';
-  document.querySelectorAll('.menu-page').forEach(p=>p.classList.remove('active'));
-  const page=document.getElementById('page-'+id);
-  if(page){page.classList.add('active');}
-  window.scrollTo({top:0,behavior:'smooth'});
+  const key = Object.keys(ROUTES).find(k => ROUTES[k].page === id);
+  location.hash = key ? '#'+key : '#home';
 }
-function showHome(){
-  document.getElementById('mainContent').style.display='block';
-  document.querySelectorAll('.menu-page').forEach(p=>p.classList.remove('active'));
-}
+function showHome(){ location.hash = '#home'; }
 </script>
 </body>
 </html>
